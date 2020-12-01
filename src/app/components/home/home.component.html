@@ -1,0 +1,14 @@
+<div class="loading" *ngIf="!posts">Error al cargar los post actualice</div>
+<!-- Caja de error cuando la pagino no puede cargar los post-->
+
+
+<div class="container-fluid mt-3" *ngIf="posts">
+	<h1>Inicio</h1>
+	<hr>
+		<!-- Listado de Post desde Post-list-->
+	<app-post-list [posts]="posts"
+					[identity]="identity"
+					[url]="url">
+	</app-post-list>					
+
+</div>

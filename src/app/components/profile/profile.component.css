@@ -1,0 +1,23 @@
+.avatar_login {
+  vertical-align: middle;
+  width: 80px !important;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar_mask_profile{
+	width: 80px;
+	height: 80px;
+	border-radius: 900px;
+	overflow: hidden; 
+}
+
+.avatar_mask_profile img{
+	height: 80px;
+}
+
+#user-card header{
+  display: flex;
+}
+

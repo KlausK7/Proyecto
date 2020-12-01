@@ -1,0 +1,24 @@
+<div class="loading" *ngIf="!posts"> error al cargar actualice</div>
+<!-- Verifica si existen pos sino manda un mensaje de error-->
+
+<div class="container-fluid mt-3" *ngIf="posts"> <!-- verifica si existen porst antes de cargarlos-->
+	<div id="user-card">
+		<header> <!-- carga  el avatar del usuario y su nombre-->
+			<div class="avatar_mask_profile float left mr-3">
+				<img src="{{url + 'usuario/avatar/'+ identity.image }}" class="avatar_login">
+			</div>
+			<div class="data_mask float-left">
+				<h1>Perfil de {{user?.name + ' ' + user?.surname}}</h1>
+				<p [innerHTML]="user?.description"></p>
+			</div>
+		</header>
+		<div class="clearfix"></div>	
+		<hr>	
+		
+		<!-- Listado de Post desde Post-list-->
+		<app-post-list [posts]="posts"
+						[identity]="identity"
+						[url]="url">
+		</app-post-list>					
+	</div>
+</div>

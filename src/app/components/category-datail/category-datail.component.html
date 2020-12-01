@@ -1,0 +1,73 @@
+<div class="loading" *ngIf="!category"> Error actualizar la pagina</div> 
+<!-- en caso que encuentre un error al buscar las categorias -->
+
+
+<div class="container-fluid mt-3" *ngIf="category">
+	<h1>Post de categoria {{category.name}}</h1>
+	<hr>
+	
+	<div class="loading" *ngIf="!posts"> Error actualizar la pagina<</div> <!-- en caso de no encontrar los post de categoria-->
+
+	<div class="alert alert-warning " *ngIf="posts && posts.length < 1"> <!-- mensaje si la categoria no tiene post-->
+		Esta Categoria no tiene Post
+	</div>
+
+	<div class="card-columns" *ngIf="posts && posts.length >= 1">
+		<article class="card w-100" *ngFor="let post of posts">
+			<div class="card-header">
+				<h2>
+					<a [routerLink]="['/entrada',post.id]">{{post.title}} </a>
+				</h2>
+			</div>
+			<div class="card-body">
+				<!-- Cargar Imagen -->
+				<div class="post-image w-100" *ngIf="post.image">
+					<img src="{{ url + 'post/getImage/'+ post.image }}" class="w-100">
+				</div>
+				<div class="post-image w-100" *ngIf="!post.image">
+					<img src="http://via.placeholder.com/400x250" class="w-100">
+				</div>
+				<!-- botones de accion -->
+				<div class="post-buttones mt-3">
+					<a [routerLink]="['/entrada',post.id]" class="btn btn-success mr-2">Leer</a>
+					<span *ngIf="identity && identity.sub == post.user_id">
+						<a class="btn btn-warning mr-2" [routerLink]="['/editar-entrada', post.id]">Editar</a>
+						<!-- Button to Open the Modal -->
+						<button type="button" class="btn btn-danger " data-toggle="modal" [attr.data-target] ="'#myModal'+post.id">
+						  Borrar
+						</button>
+
+						<!-- The Modal -->
+						<div class="modal" id="{{'myModal'+post.id}}">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+
+						      <!-- Modal Header -->
+						      <div class="modal-header">
+						        <h4 class="modal-title">
+						        	¿Seguro que quieres borrar esta entrada?
+						    	</h4>
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						      </div>
+
+						      <!-- Modal body -->
+						      <div class="modal-body">
+						        Vas a Borrar este post definitivamente {{post-title}}
+						      </div>
+
+						      <!-- Modal footer -->
+						      <div class="modal-footer">
+						      	<a (click)="deletePost(post.id)" class="btn btn-danger ml-2" data-dismiss="modal">Borrar</a>
+						        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+						      </div>
+
+						    </div>
+						  </div>
+						</div>
+					</span>
+				</div>
+			</div>
+		</article>
+
+	</div> 
+</div>

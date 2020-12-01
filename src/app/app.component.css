@@ -1,0 +1,17 @@
+.avatar_login {
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar_login{
+	height: 50px
+}
+
+.post-image{
+	height: 200px;
+	overflow: hidden;
+}
+

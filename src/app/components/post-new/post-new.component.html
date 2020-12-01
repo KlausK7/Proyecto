@@ -1,0 +1,54 @@
+<div class="col-md-12 mt-3">
+	<h1> {{page_title}}</h1>
+	<p> {{sub_title}}</p>
+	<hr/>
+	<!-- Mensaje de alerta aqui -->
+	<div class="alert alert-success col-md-5" *ngIf="status == 'success'">
+		Los cambios se ha completado correctamente
+	</div>
+		<div class="alert alert-danger col-md-5" *ngIf="status == 'error'">
+		El registro a tenia un error, 
+	</div>
+	<form class="col-md-5 ml-0 pl-0" #postNew="ngForm" (ngSubmit)="onSubmit(postNew)">
+		<div class="form-group">
+			<label for="tittle">Titulo del post</label>
+			<input type="text" name="tittle" #title="ngModel" [(ngModel)]="post.title" class="form-control" required/>
+			<small *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
+				El titulo no es valido
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="content">Contenido</label>
+			<input  type="text" name="content" class="form-control" #content="ngModel" [(ngModel)]="post.content" /> 
+			<small *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
+				El contenido no es valido
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="category_id">Categoria</label>
+			<select name="category_id" #category="ngModel" [(ngModel)]="post.category_id" class="form-control">
+				<option *ngFor="let category of categories" value="{{category.id}}" >
+					{{category.name}}
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for="image">Imagen</label>
+			<div *ngIf="is_edit && post.image">
+				<img src="{{ url + 'post/getImage/'+ post.image }}" class="avatar_edit">
+			</div>
+			<angular-file-uploader 
+			      [config]="afuConfig"
+			      [resetUpload]=true
+      			  (ApiResponse)="imagenUpload($event)">
+			</angular-file-uploader>
+		</div>
+
+		<input type="submit" name="guardar" class="btn btn-success" [disabled]="postNew.invalid"/>
+
+	</form>
+	<br/>
+
+</div>
